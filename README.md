@@ -1,7 +1,7 @@
 # ArduinoWASD
 DDR Pad prototype using the Arduino UNO
 
-Ports:
+Pins:
 * 3 = W
 * 4 = A
 * 5 = S
