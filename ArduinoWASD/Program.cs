@@ -27,7 +27,7 @@ namespace ArduinoWASD
             // Open port
             try
             {
-                if (port.Length == 1)
+                if(port.Length == 1)
                     arduino = new SerialPort("COM" + port);
                 else
                     arduino = new SerialPort(port);
@@ -49,7 +49,7 @@ namespace ArduinoWASD
             // Loop
             new Thread(() =>
             {
-                while (true)
+                while(true)
                 {
                     Loop();
                     Thread.Sleep(1);
@@ -59,19 +59,14 @@ namespace ArduinoWASD
 
         static void Loop()
         {
-            string line = arduino.ReadLine();
-            // Serial may not be correct at startup
-            if (line.Length >= 4) {
-                int count = 0;
-                foreach(VirtualKeyCode key in keys)
-                {
-                    if (line[count] == '1')
-                        sim.Keyboard.KeyDown(key);
-                    else
-                        sim.Keyboard.KeyUp(key);
+            int inputs = arduino.ReadByte();
 
-                    count++;
-                }
+            for(int i = 0; i < keys.Length; i++)
+			{
+                if ((inputs & (1 << i)) != 0)
+                    sim.Keyboard.KeyDown(keys[i]);
+                else
+                    sim.Keyboard.KeyUp(keys[i]);
             }
         }
     }

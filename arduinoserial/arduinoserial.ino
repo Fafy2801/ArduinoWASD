@@ -23,5 +23,5 @@ void loop() {
 
   // Finish sending serial for this loop
   Serial.println();
-  delay(100);
+  delay(25);
 }
