@@ -3,6 +3,7 @@ using System.IO.Ports;
 using WindowsInput;
 using System.Threading;
 using WindowsInput.Native;
+using System.Collections.Generic;
 
 namespace ArduinoWASD
 {
@@ -17,10 +18,14 @@ namespace ArduinoWASD
             VirtualKeyCode.VK_D,
         };
 
+        static List<bool> last = new List<bool>();
         static void Main(string[] args)
         {
-        // Get COM
-        PortInit:
+
+            for (int i = 0; i < keys.Length; i++)
+                last.Add(false);
+            // Get COM
+            PortInit:
             Console.WriteLine("Input COM port:");
 
             string port = Console.ReadLine();
@@ -63,10 +68,17 @@ namespace ArduinoWASD
 
             for(int i = 0; i < keys.Length; i++)
 			{
-                if ((inputs & (1 << i)) != 0)
+                if ((inputs & (1 << i)) != 0 && !last[i])
+				{
                     sim.Keyboard.KeyDown(keys[i]);
-                else
+                    last[i] = true;
+				}
+                else if(last[i])
+				{
+
                     sim.Keyboard.KeyUp(keys[i]);
+                    last[i] = false;
+				}
             }
         }
     }
