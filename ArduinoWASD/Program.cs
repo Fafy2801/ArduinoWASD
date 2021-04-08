@@ -68,17 +68,20 @@ namespace ArduinoWASD
 
             for(int i = 0; i < keys.Length; i++)
 			{
-                if ((inputs & (1 << i)) != 0 && !last[i])
-				{
-                    sim.Keyboard.KeyDown(keys[i]);
-                    last[i] = true;
-				}
-                else if(last[i])
-				{
-
-                    sim.Keyboard.KeyUp(keys[i]);
+                if ((inputs & (1 << i)) != 0)
+                {
+                    if (!last[i])
+                    {
+                        sim.Keyboard.KeyDown(keys[i]);
+                        last[i] = true;
+                    }
+                }
+                else
+                {
+                    if (last[i])
+                        sim.Keyboard.KeyUp(keys[i]);
                     last[i] = false;
-				}
+                }
             }
         }
     }
