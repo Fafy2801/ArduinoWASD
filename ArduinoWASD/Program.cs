@@ -12,10 +12,10 @@ namespace ArduinoWASD
         static SerialPort arduino;
         static InputSimulator sim;
         static readonly VirtualKeyCode[] keys = {
-            VirtualKeyCode.VK_W,
-            VirtualKeyCode.VK_A,
-            VirtualKeyCode.VK_S,
             VirtualKeyCode.VK_D,
+            VirtualKeyCode.VK_F,
+            VirtualKeyCode.VK_J,
+            VirtualKeyCode.VK_K,
         };
 
         static List<bool> last = new List<bool>();

@@ -1,9 +1,9 @@
 #include<CapacitiveSensor.h>
 
-int PIN_OUT = 3;
+int PIN_OUT = 2;
 
-int pins[4] = {5, 6, 10, 11};
-int leds[4] = {8, 9, 12, 4};
+int pins[4] = {5, 6, 9, 10};
+int leds[4] = {3, 4, 11, 12};
 
 int iterations = sizeof(pins) / sizeof(int);
 
