@@ -27,9 +27,9 @@ byte out = 0;
 void loop() {
   out = 0;
   for(int i = 0; i < iterations; i++){
-    reading = sensors[i].capacitiveSensor(160);
-
-    if(reading > 25){
+    reading = sensors[i].capacitiveSensor(30);
+    //Serial.println(reading);
+    if(reading >= 20){
       bitSet(out, i);
       digitalWrite(leds[i], HIGH);
     } else
@@ -37,5 +37,4 @@ void loop() {
   }
 
   Serial.write(out);
-  //delay(10);
 }
